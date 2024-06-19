@@ -1,4 +1,7 @@
 package com.example.sem8.repositorio;
 
-public class AlumnoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.sem8.entidad.Alumno;
+public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
 }
