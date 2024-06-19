@@ -1,4 +1,6 @@
 package com.example.sem8.servicio;
 
-public class CursoService {
+import com.example.sem8.entidad.Curso;
+
+public interface CursoService extends iGenericoService<Curso,Long>{
 }
