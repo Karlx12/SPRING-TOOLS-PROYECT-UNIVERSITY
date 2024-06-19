@@ -33,7 +33,7 @@ public class Usuario {
         this.estado = estado;
 
     }
-    
+
 
 
 }
