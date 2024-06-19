@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ejemplo Spring Boot - JPA</title>
 </head>
 <body>
+<h1> Sistema de Control Académico</h1>
+<nav>
+    <ul>
+        <li><a href="http:/localhost:8080/alumno/index">Registrar Alumno</a> </li>
+        <li><a th:href="@{/docente/index}">Registrar Docente</a></li>
+        <li><a th:href="@{/curso/index}">Registrar Curso</a></li>
+        <li><a th:href="@{/nota/index}">Registrar Nota</a></li>
+    </ul>
+</nav>
+
 
 </body>
 </html>
