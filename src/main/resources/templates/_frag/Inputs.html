@@ -1,0 +1,12 @@
+<div th:fragment="iHtml(tipo,label,ph,campo)">
+    <label th:if="${tipo!='hidden'}"
+           th:for="${'input'+ campo}"
+           th:text="${label}">Etiqueta</label>
+    <input th:type="${tipo}" th:id="${'input'+ campo}"
+           th:placeholder="${ph}"
+           th:field="*{__${campo}__}"
+           th:value="*{__${campo}__}"/>
+    <div th:if="${#fields.hasErrors('__${campo}__')}">
+        <small th:errors="*{__${campo}__}">Error</small>
+    </div>
+</div>

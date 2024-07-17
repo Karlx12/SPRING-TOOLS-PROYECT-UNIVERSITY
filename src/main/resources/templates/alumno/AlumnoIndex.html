@@ -1,10 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html>
+    <head th:replace="~{_frag/Base::site-head}"></head>
 <body>
-
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <H2>Lista de Alumnos</H2>
+    <div>
+        <ul>
+            <li><a th:href="@{/alumno/nuevo}">Agregar Alumno</a></li>
+            <li><a th:href="@{/}">Cerrar</a></li>
+        </ul>
+    </div>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>Nombres</td>
+                    <td>Apellidos</td>
+                    <td>DNI</td>
+                    <td>Fecha Nacimiento</td>
+                    <td>Celular</td>
+                    <td>eMail</td>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
+                    <td>Matricular</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="alumno : ${listaAlumnos}">
+                    <td th:text="${alumno.nombres}">Nombres</td>
+                    <td th:text="${alumno.apellidos}">Apellidos</td>
+                    <td th:text="${alumno.dni}">DNI</td>
+                    <td th:text="${#calendars.format(alumno.fechaNacimiento,'dd/MM/yyyy')}">Fecha Nacimiento</td>
+                    <td th:text="${alumno.celular}">Celular</td>
+                    <td th:text="${alumno.eMail}">eMail</td>
+                    <td th:text="${/alumno/editar/}+${alumno.id}">Editar</td>
+                    <td th:text="${/alumno/eliminar/}+${alumno.id}">Eliminar</td>
+                    <td th:text="${/alumno/matricular/}+${alumno.id}">Matricular</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <ul>
+            <li><a th:href="@{/alumno/nuevo}">Agregar Alumno</a></li>
+            <li><a th:href="@{/}">Cerrar</a></li>
+        </ul>
+    </div>
 </body>
 </html>

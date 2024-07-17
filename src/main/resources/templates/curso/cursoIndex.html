@@ -1,0 +1,37 @@
+<html>
+    <head th:replace="~{_frag/Base::site-head}"></head>
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <H2>Listado de Cursos</H2>
+    <div>
+        <ul>
+            <li><a th:href="@{/curso/nuevo}">Agregar Curso</a></li>
+            <li><a th:href="@{/}">Cerrar</a></li>
+        </ul>
+    </div>
+    <div>
+        <table border="1">
+            <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Créditos</td>
+                <td>Editar</td>
+                <td>Eliminar</td>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="curso : ${listaCursos}">
+                    <td th:text="${curso.nombre}">Nombre</td>
+                    <td th:text="${curso.creditos}">Créditos</td>
+                    <td th:text="${/curso/editar/}+${curso.id}">Editar</td>
+                    <td th:text="${/curso/eliminar/}+${curso.id}">Eliminar</td>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <ul>
+            <li><a th:href="@{/curso/nuevo}">Agregar Curso</a></li>
+            <li><a th:href="@{/}">Cerrar</a></li>
+        </ul>
+    </div>
+</html>

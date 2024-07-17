@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ejemplo Spring Boot - JPA</title>
+</head>
+<body>
+    <h2>Datos de Docente</h2>
+    <form th:object="${docente}" th:action="@{/docente/guardar}" th:method="post">
+        <div>
+            <label hidden="true" for="inputID">ID:</label>
+            <input hidden="true"  id="inputID" placeholder="Ingrese ID" th:field="*{id}" th:value="*{id}"/>
+        </div>
+        <div>
+            <label for="inputApellidos">Apellidos:</label>
+            <input type="text" id="inputApellidos" placeholder="Ingrese Apellidos" th:field="*{apellidos}" th:value="*{apellidos}"/>
+        </div>
+        <div>
+            <label for="inputNombres">Nombres:</label>
+            <input type="text" id="inputNombres" placeholder="Ingrese Nombres" th:field="*{nombres}" th:value="*{nombres}"/>
+        </div>
+        <div>
+            <label for="inputDNI">DNI:</label>
+            <input type="text" id="inputDNI" placeholder="Ingrese DNI" th:field="*{dni}" th:value="*{dni}"/>
+        </div>
+        <div>
+            <label for="inputFechaNac">Fecha Nacimiento: </label>
+            <input type="date" id="inputFechaNac" th:field="*{fechaNacimiento}" th:value="*{fechaNacimiento}"/>
+        </div>
+        <div>
+            <label for="inputDireccion">Dirección:</label>
+            <input type="text" id="inputDireccion" placeholder="Ingrese Dirección" th:field="*{direccion}" th:value="*{direccion}"/>
+        </div>
+        <div>
+            <label for="inputCelular">Celular:</label>
+            <input type="text" id="inputCelular" placeholder="Ingrese Celular" th:field="*{celular}" th:value="*{celular}"/>
+        </div>
+        <div>
+            <label for="inputEmail">eMail:</label>
+            <input type="text" id="inputEmail" placeholder="Ingrese eMail" th:field="*{eMail}" th:value="*{eMail}"/>
+        </div>
+        <div>
+            <label for="inputEspecialidad">Especialidad:</label>
+            <input type="text" id="inputEspecialidad" placeholder="Ingrese Especialidad" th:field="*{especialidad}" th:value="*{especialidad}"/>
+        </div>
+        <div>
+            <label for="inputFechaIng">Fecha Ingreso</label>
+            <input type="date" id="inputFechaIng" th:field="*{fechaIngreso}" th:value="*{fechaIngreso}"/>
+        </div>
+        <div>
+            <br>
+            <button type="submit">Guardar</button>
+            <a th:href="@{/docente/index}" role="button">Cancelar</a>
+        </div>
+
+    </form>
+
+
+</body>
+</html>

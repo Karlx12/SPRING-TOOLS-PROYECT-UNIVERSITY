@@ -1,0 +1,24 @@
+<html>
+    <head th:replace="~{_frag/Base::site-head}"></head>
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <H2>Datos de Curso</H2>
+    <form th:action="@{/curso/guardar}" th:object="${curso}" method="post">
+        <div th:replace="~{_frag/Inputs::iHtml(tipo,label,ph,campo)}"></div>
+        <div th:replace="~{_frag/Inputs::iHtml(text,'Nombre Curso:','Ingrese Nombre',nombre)}"></div>
+        <div th:replace="~{_frag/Inputs::iHtml(number,'Créditos:','Ingrese Créditos',creditos)}"></div>
+        <div>
+            <label for="selectDocente">Docente:</label>
+            <Select id="selectDocente" name="docente.id">
+                <option th:each="docente : ${listaDocentes}"
+                        th:value="${docente.id}"
+                        th:text="${docente.apellidos} + ', ' + ${docente.nombres}"></option>
+                        th:selected="${docente.id} == ${curso.docente.id}"/>
+            </Select>
+        </div>
+        <div>
+            <br>
+            <button type="submit">Aceptar</button>
+            <a th:href="@{/curso/index}" role="button">Cancelar</a>
+    </form>
+</html>

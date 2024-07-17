@@ -1,0 +1,31 @@
+<html>
+    <head th:replace="~{_frag/Base::site-head}"></head>
+<body>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <H2>Matricula de Cursos</H2>
+    <H4 th:text="${alumno.apellidos} + ' ' + ${alumno.nombres}"> Alumno </H4>
+    <form th:action="@{/nota/matricula/guardar}" method="post">
+        <div>
+            <input type="hidden" id="idAlumno" th:field="*{alumno.id}" th:value="*{alumno.id}"/>
+        </div>
+        <div>
+            <p>Selecciona cursos a matricular:</p>
+            <th:block th:each="curso : ${listaCursos}">
+                <div>
+                    <input type="checkbox" name="idsSeleccionados"
+                           th:cheked="${#lists.contains(idCursosActuales,curso.id)}"
+                           th:value="${curso.id}" th:id="|id-${curso.id}-matricula|"/>
+                    <label th:for="|id-${curso.id}-matricula|" th:text="${curso.nombre}"></label>
+                </div>
+            </th:block>
+        </div>
+        <div>
+            <br>
+            <button type="submit">Aceptar</button>
+            <a th:href="@{/alumno/index}" role="button">Cancelar</a>
+        </div>
+    </form>
+</body>
+
+
+</html>
