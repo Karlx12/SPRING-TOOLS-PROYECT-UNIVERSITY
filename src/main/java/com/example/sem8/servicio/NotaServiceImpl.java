@@ -34,5 +34,9 @@ public class NotaServiceImpl implements NotaService {
     public void eliminar(NotaID id){
         notaRepository.deleteById(id);
     }
+    @Override
+    public List<Nota> listarPorAlumno(Long idAlumno){
+        return notaRepository.findByAlumnoId(idAlumno);
+    }
 
 }
