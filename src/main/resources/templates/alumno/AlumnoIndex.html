@@ -2,17 +2,16 @@
     <head th:replace="~{_frag/Base::site-head}"></head>
 <body>
     <header th:replace="~{_frag/Base::site-header}"></header>
-    <H2>Lista de Alumnos</H2>
+    <article class="container mt-3">
+    <H3>Lista de Alumnos</H3>
     <div>
-        <ul>
-            <li><a th:href="@{/alumno/nuevo}">Agregar Alumno</a></li>
-            <li><a th:href="@{/}">Cerrar</a></li>
-        </ul>
+        <th:block th:replace="~{_frag/Inputs::btn_agregar(@{/alumno/nuevo},'Agregar Alumno')}"></th:block>
+        <th:block th:replace="~{_frag/Inputs::btn_cerrar}"></th:block>
     </div>
     <div>
-        <table border="1">
+        <table class="table table-striped table-bordered mt-2">
             <thead>
-                <tr>
+                <tr class="table-primary">
                     <td>Nombres</td>
                     <td>Apellidos</td>
                     <td>DNI</td>
@@ -32,18 +31,16 @@
                     <td th:text="${#calendars.format(alumno.fechaNacimiento,'dd/MM/yyyy')}">Fecha Nacimiento</td>
                     <td th:text="${alumno.celular}">Celular</td>
                     <td th:text="${alumno.eMail}">eMail</td>
-                    <td th:text="${/alumno/editar/}+${alumno.id}">Editar</td>
-                    <td th:text="${/alumno/eliminar/}+${alumno.id}">Eliminar</td>
-                    <td th:text="${/alumno/matricular/}+${alumno.id}">Matricular</td>
+                    <td><th:block th:replace="~{_frag/Inputs::btn_editar(@{/alumno/editar}+${alumno.id})}"></th:block></td>
+                    <td><th:block th:replace="~{_frag/Inputs::btn_eliminar(@{/alumno/eliminar}+${alumno.id})}"></th:block></td>
+                    <td><a th:href="@{/nota/matricular/}+${alumno.id}" class="btn btn-outline-info btn-sm">Matricular</a></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div>
-        <ul>
-            <li><a th:href="@{/alumno/nuevo}">Agregar Alumno</a></li>
-            <li><a th:href="@{/}">Cerrar</a></li>
-        </ul>
+        <th:block th:replace="~{_frag/Inputs::btn_agregar(@{/alumno/nuevo},'Agregar Alumno')}"></th:block>
+        <th:block th:replace="~{_frag/Inputs::btn_cerrar}"></th:block>
     </div>
 </body>
 </html>

@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ejemplo Spring Boot - JPA</title>
-</head>
+<head th:replace="~{/_frag/Base::site-head}"></head>
 <body>
-    <h2>Datos de Docente</h2>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <h3>Datos de Docente</h3>
     <form th:object="${docente}" th:action="@{/docente/guardar}" th:method="post">
-        <div>
-            <label hidden="true" for="inputID">ID:</label>
-            <input hidden="true"  id="inputID" placeholder="Ingrese ID" th:field="*{id}" th:value="*{id}"/>
+        <div class="form-group mb-3">
+            <label hidden="hidden" for="inputID" class="form-label">ID:</label>
+            <input type="hidden"  id="inputID" placeholder="Ingrese ID" th:field="*{id}" th:value="*{id}"  class="form-control"/>
         </div>
-        <div>
-            <label for="inputApellidos">Apellidos:</label>
-            <input type="text" id="inputApellidos" placeholder="Ingrese Apellidos" th:field="*{apellidos}" th:value="*{apellidos}"/>
+        <div class="form-group mb-3">
+            <label for="inputApellidos" class="form-label">Apellidos:</label>
+            <input type="text" id="inputApellidos" placeholder="Ingrese Apellidos" th:field="*{apellidos}" th:value="*{apellidos}" class="form-control"/>
         </div>
-        <div>
-            <label for="inputNombres">Nombres:</label>
-            <input type="text" id="inputNombres" placeholder="Ingrese Nombres" th:field="*{nombres}" th:value="*{nombres}"/>
+        <div class="form-group mb-3">
+            <label for="inputNombres" class="form-label">Nombres:</label>
+            <input type="text" id="inputNombres" placeholder="Ingrese Nombres" th:field="*{nombres}" th:value="*{nombres}" class="form-control"/>
         </div>
-        <div>
-            <label for="inputDNI">DNI:</label>
-            <input type="text" id="inputDNI" placeholder="Ingrese DNI" th:field="*{dni}" th:value="*{dni}"/>
+        <div class="form-group mb-3">
+            <label for="inputDNI" class="form-label">DNI:</label>
+            <input type="text" id="inputDNI" placeholder="Ingrese DNI" th:field="*{dni}" th:value="*{dni}" class="form-control"/>
         </div>
-        <div>
-            <label for="inputFechaNac">Fecha Nacimiento: </label>
-            <input type="date" id="inputFechaNac" th:field="*{fechaNacimiento}" th:value="*{fechaNacimiento}"/>
+        <div class="form-group mb-3">
+            <label for="inputFechaNac" class="form-label">Fecha Nacimiento: </label>
+            <input type="date" id="inputFechaNac" th:field="*{fechaNacimiento}" th:value="*{fechaNacimiento}" class="form-control"/>
         </div>
-        <div>
-            <label for="inputDireccion">Dirección:</label>
-            <input type="text" id="inputDireccion" placeholder="Ingrese Dirección" th:field="*{direccion}" th:value="*{direccion}"/>
+        <div class="form-group mb-3">
+            <label for="inputDireccion" class="form-label">Dirección:</label>
+            <input type="text" id="inputDireccion" placeholder="Ingrese Dirección" th:field="*{direccion}" th:value="*{direccion}" size="50" class="form-control"/>
         </div>
-        <div>
-            <label for="inputCelular">Celular:</label>
-            <input type="text" id="inputCelular" placeholder="Ingrese Celular" th:field="*{celular}" th:value="*{celular}"/>
+        <div class="form-group mb-3">
+            <label for="inputCelular" class="form-label">Celular:</label>
+            <input type="text" id="inputCelular" placeholder="Ingrese Celular" th:field="*{celular}" th:value="*{celular}" class="form-control"/>
         </div>
-        <div>
-            <label for="inputEmail">eMail:</label>
-            <input type="text" id="inputEmail" placeholder="Ingrese eMail" th:field="*{eMail}" th:value="*{eMail}"/>
+        <div class="form-group mb-3">
+            <label for="inputEmail" class="form-label">eMail:</label>
+            <input type="text" id="inputEmail" placeholder="Ingrese eMail" th:field="*{email}" th:value="*{email}" class="form-control"/>
         </div>
-        <div>
-            <label for="inputEspecialidad">Especialidad:</label>
-            <input type="text" id="inputEspecialidad" placeholder="Ingrese Especialidad" th:field="*{especialidad}" th:value="*{especialidad}"/>
+        <div class="form-group mb-3">
+            <label for="inputEspecialidad" class="form-label">Especialidad:</label>
+            <input type="text" id="inputEspecialidad" placeholder="Ingrese Especialidad" th:field="*{especialidad}" th:value="*{especialidad}" class="form-control"/>
         </div>
-        <div>
-            <label for="inputFechaIng">Fecha Ingreso</label>
-            <input type="date" id="inputFechaIng" th:field="*{fechaIngreso}" th:value="*{fechaIngreso}"/>
+        <div class="form-group mb-3">
+            <label for="inputFechaIng" class="form-label">Fecha Ingreso</label>
+            <input type="date" id="inputFechaIng" th:field="*{fechaIngreso}" th:value="*{fechaIngreso}" class="form-control"/>
         </div>
         <div>
             <br>

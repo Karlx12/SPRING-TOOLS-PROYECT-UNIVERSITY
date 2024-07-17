@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ejemplo Spring Boot - JPA</title>
-</head>
+<head th:replace="~{_frag/Base::site-head}"></head>
 <body>
-<h1>Listado de Docentes</h1>
+    <header th:replace="~{_frag/Base::site-header}"></header>
+    <article class="container mt-3 ">
+        <h3>Listado de Docentes</h3>
+        <div>
+            <a th:href="@{/docente/nuevo}" class="btn btn-outline-primary">Agregar Docente</a>
+            <a th:href="@{/}" class="btn btn-outline-secondary">Cerrar</a>
+        </div>
+        <div>
+            <table class="table table-striped mt-2 table-bordered">
+                <thead>
+                    <tr class="table-primary">
+                        <td>Apellidos</td>
+                        <td>Nombres</td>
+                        <td>DNI</td>
+                        <td>Celular</td>
+                        <td>eMail</td>
+                        <td>Especialidad</td>
+                        <td>Fecha ingreso</td>
+                        <td>Editar</td>
+                        <td>Eliminar</td>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr th:each="docente : ${listaDocentes}">
+                        <td th:text="${docente.apellidos}">Apellidos</td>
+                        <td th:text="${docente.nombres}">Nombres</td>
+                        <td th:text="${docente.dni}">DNI</td>
+                        <td th:text="${docente.celular}">Celular</td>
+                        <td th:text="${docente.email}">eMail</td>
+                        <td th:text="${docente.especialidad}">Especialidad</td>
+                        <td th:text="${#calendars.format(docente.fechaIngreso,'dd/MM/yyyy')}">Fecha ingreso</td>
+                        <td th:text="${/docente/editar/}+${docente.id}" class="btn btn-outline-warning">Editar</td>
+                        <td th:text="${/docente/eliminar/}+${docente.id}" class="btn btn-outline-danger">Eliminar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
 <div>
-    <ul>
-        <li><a th:href="@{/docente/nuevo}">Agregar Docente</a></li>
-        <li><a th:href="@{/}">Cerrar</a></li>
-    </ul>
-</div>
-<div>
-    <table id="listadoDocente" border="1">
-        <thead>
-            <tr>
-                <td>Apellidos</td>
-                <td>Nombres</td>
-                <td>DNI</td>
-                <td>Celular</td>
-                <td>eMail</td>
-                <td>Especialidad</td>
-                <td>Fecha ingreso</td>
-                <td>Editar</td>
-                <td>Eliminar</td>
-            </tr>
-        
-        </thead>
-        <tbody>
-            <tr th:each="docente : ${listaDocentes}">
-                <td th:text="${docente.apellidos}">Apellidos</td>
-                <td th:text="${docente.nombres}">Nombres</td>
-                <td th:text="${docente.dni}">DNI</td>
-                <td th:text="${docente.celular}">Celular</td>
-                <td th:text="${docente.eMail}">eMail</td>
-                <td th:text="${docente.especialidad}">Especialidad</td>
-                <td th:text="${#calendars.format(docente.fechaIngreso,'dd/MM/yyyy')}">Fecha ingreso</td>
-                <td th:text="${/docente/editar/}+${docente.id}">Editar</td>
-                <td th:text="${/docente/eliminar/}+${docente.id}">Eliminar</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div>
-    <li><a th:href="@{/docente/nuevo}">Agregar Docente</a></li>
-    <li><a th:href="@{/}">Cerrar</a></li>
+    <a th:href="@{/docente/nuevo}" class="btn btn-outline-primary">Agregar Docente</a>
+    <a th:href="@{/}" class="btn btn-outline-secondary">Cerrar</a>
 </div>
 
 </body>

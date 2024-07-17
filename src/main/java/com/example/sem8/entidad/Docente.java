@@ -19,11 +19,11 @@ public class Docente {
         @Column(length = 35, nullable = false)
         @NotBlank(message = "El nombre no puede estar en blanco")
         @Size(min=2,max=35,message="El nombre debe tener entre 2 y 35 caracteres")
-        private String nombre;
+        private String nombres;
         @Column(length = 35, nullable = false)
         @NotBlank(message = "El apellido no puede estar en blanco")
         @Size(min=2,max=35,message="El apellido debe tener entre 2 y 35 caracteres")
-        private String apellido;
+        private String apellidos;
         @Column(length = 8, nullable = false, unique = true)
         @NotBlank(message = "El DNI no puede estar en blanco")
         @Size(min=8,max=8,message="El DNI debe tener entre 2 y 35 caracteres")
@@ -40,7 +40,7 @@ public class Docente {
         @Column(length = 80)
         @NotBlank(message = "El eMail no puede estar en blanco")
         @Email(message="Debe ingresar un correo válido")
-        private String eMail;
+        private String email;
         @Column(length = 80)
         private String direccion;
         @DateTimeFormat(iso=ISO.DATE)
