@@ -1,4 +1,4 @@
-<head>
+<head xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
@@ -49,6 +49,18 @@
                     </ul>
                     </li>
                 </ul>
+            </div>
+            <div class="me-auto">
+                <div sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post" id="logoutForm">
+                        <p class="text-white align-middle m-0">
+                        <strong sec:authentication="name">Usuario</strong>
+                        <small sec:authentication="principal.authorities">Roles</small>
+                        <button type="submit" class="btn btn-link text-white btn-sm p-0">Cerrar Sesión</button>
+                        </p>
+                    </form>
+
+                </div>
             </div>
         </div>
     </nav>

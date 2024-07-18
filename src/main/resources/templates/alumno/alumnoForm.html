@@ -2,22 +2,24 @@
     <head th:replace="~{_frag/Base::site-head}"></head>
 <body>
     <header th:replace="~{_frag/Base::site-header}"></header>
-    <H2>Datos de Alumnos</H2>
-    <form th:action="@{/alumno/guardar}" th:object="${alumno}" method="post">
-        <div th:replace="~{_frag/Inputs::iHtml(tipo,label,ph,campo)}"></div>
-        <div th:replace="~{_frag/Inputs::iHtml(text,'Apellidos:','Ingrese Apellidos',apellidos)}"></div>
-        <div th:replace="~{_frag/Inputs::iHtml(text,'Nombres:','Ingrese Nombres',nombres)}"></div>
-        <div th:replace="~{_frag/Inputs::iHtml(text,'DNI:','Ingrese DNI',dni)}"></div>
-        <div th:replace="~{_frag/Inputs::iHtml(date,'Fecha Nacimiento:','Ingrese Fecha Nacimiento',fechaNacimiento)}"></div>
-        <div th:replace="~{_frag/Inputs::iHtml(text,'Celular:','Ingrese Celular',celular)}"></div>
-        <div th:replace="~{_frag/Inputs::iHtml(email,'eMail:','Ingrese eMail',eMail)}"></div>
-        <div th:replace="~{_frag/Inputs::iHtml(text,'Dirección:','Ingrese Dirección',direccion)}"></div>
-        <div>
-            <br>
-            <button type="submit">Aceptar</button>
-            <a th:href="@{/alumno/index}" role="button">Cancelar</a>
-        </div>
-    </form>
+    <article class="container mt-3">
+        <H3>Datos de Alumno</H3>
+        <form th:action="@{/alumno/guardar}" th:object="${alumno}" method="post">
+            <div th:replace="~{_frag/Inputs::iHtml(hidden,'ID:',' ',id)}"></div>
+            <div th:replace="~{_frag/Inputs::iHtml(text,'Apellidos:','Ingrese Apellidos',apellidos)}"></div>
+            <div th:replace="~{_frag/Inputs::iHtml(text,'Nombres:','Ingrese Nombres',nombres)}"></div>
+            <div th:replace="~{_frag/Inputs::iHtml(text,'DNI:','Ingrese DNI',dni)}"></div>
+            <div th:replace="~{_frag/Inputs::iHtml(date,'Fecha Nacimiento:','Ingrese Fecha Nacimiento',fechaNacimiento)}"></div>
+            <div th:replace="~{_frag/Inputs::iHtml(text,'Celular:','Ingrese Celular',celular)}"></div>
+            <div th:replace="~{_frag/Inputs::iHtml(email,'eMail:','Ingrese eMail',eMail)}"></div>
+            <div th:replace="~{_frag/Inputs::iHtml(text,'Dirección:','Ingrese Dirección',direccion)}"></div>
+
+            <div>
+                <th:block th:replace="~{_frag/Inputs::btn_aceptar}"></th:block>
+                <th:block th:replace="~{_frag/Inputs::btn_cancelar(@{/alumno/index})}"></th:block>
+            </div>
+        </form>
+    </article>
 </body>
 
 </html>
