@@ -1,56 +1,34 @@
 package com.example.sem8.controlador;
 
-import com.example.sem8.entidad.Curso;
-import com.example.sem8.servicio.CursoService;
-import com.example.sem8.servicio.DocenteService;
-import jakarta.validation.Valid;
+import com.example.sem8.entidad.Usuario;
+import com.example.sem8.servicio.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path="/curso")
+@RequestMapping("/usuario")
 public class UsuarioController {
-    @Autowired private CursoService cursoService;
-    @Autowired private DocenteService docenteService;
+    @Autowired private UsuarioService usuarioService;
 
-    @GetMapping({"/index",""})
-    public String Indice(Model model){
-        model.addAttribute("listaCursos", cursoService.listarTodos());
-        return "curso/cursoIndex";
+    @GetMapping("/poblar")
+    public String poblar(){
+        usuarioService.agregar(new Usuario("Juan","123456","ADMIN",1));
+        usuarioService.agregar(new Usuario("Ronald","123456","USUARIO",1));
+        usuarioService.agregar(new Usuario("Max","123456","USUARIO",1));
+        return "index";
     }
-    @GetMapping("/nuevo")
-    public String mostrarFormularioNuevo(Model model){
-        model.addAttribute("curso",new Curso());
-        model.addAttribute("listaDocentes", docenteService.listarTodos());
-        return "curso/cursoForm";
+    @GetMapping("/login")
+    public String login(Model model){
+        return "usuario/paginaLogin";
     }
-    @PostMapping("/guardar")
-    public String procesarFormularioNuevo(Model model,
-                                          @Valid @ModelAttribute("curso") Curso curso, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("listaDocentes", docenteService.listarTodos());
-            return "curso/cursoForm";
-        }
-        if (curso.getId() == null)
-            cursoService.agregar(curso);
-        else
-            cursoService.actualizar(curso);
-
-        return "redirect:/curso/index";
-    }
-    @GetMapping("/editar/{id}")
-    public String mostrarFormularioEditar(Model model, @PathVariable("id") Long id){
-        Curso buscado = cursoService.buscar(id);
-        model.addAttribute("curso", buscado != null ? buscado : new Curso());
-        model.addAttribute("listaDocentes", docenteService.listarTodos());
-        return "curso/cursoForm";
-    }
-    @GetMapping("/eliminar/{id}")
-    public String eliminarCurso(Model model, @PathVariable("id") Long id){
-        cursoService.eliminar(id);
-        return "redirect:/curso/index";
+    @GetMapping("/denegado")
+    public String denegado(Authentication authresult, Model model){
+        String role= authresult.getAuthorities().toString();
+        model.addAttribute("roles",role);
+        return "usuario/pagina403";
     }
 }
