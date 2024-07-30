@@ -6,10 +6,6 @@
     <article class="container mt-3 ">
         <h3>Listado de Docentes</h3>
         <div>
-            <a th:href="@{/docente/nuevo}" class="btn btn-outline-primary">Agregar Docente</a>
-            <a th:href="@{/}" class="btn btn-outline-secondary">Cerrar</a>
-        </div>
-        <div>
             <table class="table table-striped mt-2 table-bordered">
                 <thead>
                     <tr class="table-primary">
@@ -34,8 +30,8 @@
                         <td th:text="${docente.email}">eMail</td>
                         <td th:text="${docente.especialidad}">Especialidad</td>
                         <td th:text="${#calendars.format(docente.fechaIngreso,'dd/MM/yyyy')}">Fecha ingreso</td>
-                        <td th:text="${/docente/editar/}+${docente.id}" class="btn btn-outline-warning">Editar</td>
-                        <td th:text="${/docente/eliminar/}+${docente.id}" class="btn btn-outline-danger">Eliminar</td>
+                        <td><th:block th:replace="~{_frag/Inputs::btn_editar(@{/docente/editar}+${docente.id})}"></th:block></td>
+                        <td><th:block th:replace="~{_frag/Inputs::btn_eliminar(@{/docente/eliminar}+${docente.id})}"></th:block></td>
                     </tr>
                 </tbody>
             </table>

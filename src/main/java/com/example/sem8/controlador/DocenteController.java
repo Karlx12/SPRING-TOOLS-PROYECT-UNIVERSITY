@@ -1,5 +1,6 @@
 package com.example.sem8.controlador;
 
+import com.example.sem8.entidad.Alumno;
 import com.example.sem8.entidad.Docente;
 import com.example.sem8.servicio.DocenteService;
 import jakarta.validation.Valid;
@@ -21,6 +22,8 @@ public class DocenteController {
     }
     @GetMapping("/nuevo")
     public String DocenteNuevoForm(Model model){
+
+        model.addAttribute("docente", new Docente());
         return "docente/docenteForm";
     }
     @PostMapping("/guardar")

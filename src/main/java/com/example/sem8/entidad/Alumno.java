@@ -17,11 +17,11 @@ public class Alumno {
     @Column(length = 35, nullable = false)
     @NotBlank(message = "El nombre no puede estar en blanco")
     @Size(min=2,max=35,message="El nombre debe tener entre 2 y 35 caracteres")
-    private String nombre;
+    private String nombres;
     @Column(length = 35, nullable = false)
     @NotBlank(message = "El apellido no puede estar en blanco")
     @Size(min=2,max=35,message="El apellido debe tener entre 2 y 35 caracteres")
-    private String apellido;
+    private String apellidos;
     @Column(length = 8, nullable = false, unique = true)
     @NotBlank(message = "El DNI no puede estar en blanco")
     @Size(min=8,max=8,message="El DNI debe tener entre 2 y 35 caracteres")

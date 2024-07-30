@@ -17,61 +17,65 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityJBDC {
+
     @Autowired PasswordEncoder passwordEncoder;
-    @Autowired private DataSource dataSource;
 
     @Bean
     UserDetailsService userDetailsService() {
-        JdbcUserDetailsManager manager= new JdbcUserDetailsManager(dataSource);
-        manager.setRolePrefix("ROLE_");
-        manager.setUsersByUsernameQuery("select nombre as username, "
-                + "clave as password, estado as enabled "
-                + "from usuario as users where nombre = ?");
-        manager.setAuthoritiesByUsernameQuery("select nombre as username, rol as authority "
-                + "from usuario as authorities where nombre = ?");
-        return manager;
+        return new InMemoryUserDetailsManager(
+                User.withUsername("usuario")
+                        .password(passwordEncoder.encode("123"))
+                        .roles("USER")
+                        .build(),
+                User.withUsername("admin")
+                        .password(passwordEncoder.encode("123"))
+                        .roles("USER", "ADMIN")
+                        .build()
+        );
     }
+
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .httpBasic(Customizer.withDefaults())
-                .authorizeHttpRequests((request)->
+                .httpBasic(withDefaults())
+                .authorizeHttpRequests((request) ->
                         request
                                 .requestMatchers("/css/**").permitAll()
+                                .requestMatchers("/images/**").permitAll()
                                 .requestMatchers("/js/**").permitAll()
-                                .requestMatchers("/poblar").permitAll()
-                                .requestMatchers("/img/**").permitAll()
                                 .requestMatchers("/login").permitAll()
                                 .requestMatchers("/usuario/denegado").permitAll()
                                 .requestMatchers("/*/index").permitAll()
                                 .requestMatchers("/*/nuevo").hasRole("ADMIN")
                                 .requestMatchers("/*/editar**").hasRole("ADMIN")
                                 .requestMatchers("/*/eliminar**").hasRole("ADMIN")
-                                .requestMatchers("/*/matricular**").hasAnyRole("ADMIN","USER")
+                                .requestMatchers("/matricular**").hasAnyRole("ADMIN", "USER")
                                 .anyRequest().authenticated()
-                                )
-                .exceptionHandling((exceptionHandling)->
+                )
+                .exceptionHandling((exceptionHandling) ->
                         exceptionHandling
-                                .accessDeniedPage("/usuario/denegado"))
-                .formLogin(form->
+                                .accessDeniedPage("/usuario/denegado")
+                )
+                .formLogin((form) ->
                         form
                                 .permitAll()
                                 .usernameParameter("username")
                                 .passwordParameter("password")
                                 .loginPage("/usuario/login")
-                                .failureUrl("/usuario/denegado")
+                                .failureUrl("/usuario/login?error=true")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/",true)
+                                .defaultSuccessUrl("/", true)
                 )
-
-                .logout(logout->logout.permitAll().logoutSuccessUrl("/login"))
+                .logout((logout) ->
+                        logout.permitAll()
+                                .logoutSuccessUrl("/login")
+                                .clearAuthentication(true)
+                )
                 .build();
-
     }
-
-
 }
-
