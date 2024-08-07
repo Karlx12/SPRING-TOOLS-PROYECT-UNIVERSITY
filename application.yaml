@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-postgres
+  template:
+    metadata:
+      labels:
+        app: springboot-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: docker.io/postgres:16
+          env:
+            - name: POSTGRES_DB
+              value: ejemplospringboot
+            - name: POSTGRES_USER
+              value: ejemplospringboot
+            - name: POSTGRES_PASSWORD
+              value: "@Schattenbild12."
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+        - name: springboot-app
+          image: springboot-example:latest
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://localhost:5432/ejemplospringboot
+            - name: SPRING_DATASOURCE_USERNAME
+              value: ejemplospringboot
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "@Schattenbild12."
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+          volumeMounts:
+            - name: springboot-logs
+              mountPath: /var/log/springboot
+      volumes:
+        - name: postgres-data
+          emptyDir: {}
+        - name: springboot-logs
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springboot-postgres-service
+spec:
+  selector:
+    app: springboot-postgres
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      nodePort: 30001
+      appProtocol: TCP
+  type: LoadBalancer
